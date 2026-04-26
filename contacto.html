@@ -12,7 +12,6 @@
             text-align:center;
         }
 
-        /* MENÚ */
         .menu{
             position:fixed;
             top:0;
@@ -28,7 +27,6 @@
             font-weight:bold;
         }
 
-        /* FORMULARIO */
         .formulario{
             margin-top:120px;
         }
@@ -66,13 +64,11 @@
         <a href="contacto.html">Contacto</a>
     </div>
 
-    <!-- FORMULARIO -->
     <div class="formulario">
         <h1>Contáctame</h1>
 
         <form action="https://formsubmit.co/rosalyhirujo01@gmail.com" method="POST">
 
-            <!-- REDIRECCIÓN -->
             <input type="hidden" name="_next" value="https://rosaly-hirujo.github.io/mi-pagina/index.html">
 
             <input type="text" name="nombre" placeholder="Tu nombre" required><br>
@@ -84,8 +80,17 @@
             <button type="submit">Enviar</button>
 
         </form>
-
     </div>
+
+    <!-- SCRIPT AUTOMÁTICO -->
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const obra = params.get("obra");
+
+        if(obra){
+            document.querySelector("textarea").value = "Me interesa " + obra;
+        }
+    </script>
 
 </body>
 </html>
