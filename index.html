@@ -1,259 +1,275 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Galería de Arte</title>
+<title>Galería de Arte</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      color: white;
-      background: linear-gradient(135deg, #1f4037, #99f2c8);
-      scroll-behavior: smooth;
-      text-align: center;
-    }
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:linear-gradient(135deg,#1f4037,#99f2c8);
+  color:white;
+  text-align:center;
+  scroll-behavior:smooth;
+}
 
-    /* ===== MENÚ ===== */
-    .menu {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      background: rgba(0,0,0,0.6);
-      padding: 15px;
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-    }
+/* MENU */
+.menu{
+  position:fixed;
+  width:100%;
+  top:0;
+  background:rgba(0,0,0,0.6);
+  padding:15px;
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
 
-    .menu a {
-      color: white;
-      margin: 0 20px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+.menu a{
+  color:white;
+  margin:0 15px;
+  text-decoration:none;
+  font-weight:bold;
+}
 
-    .menu a:hover {
-      color: #ff6b6b;
-    }
+/* PORTADA */
+.portada{
+  height:100vh;
+  background:url('cuadro1.jpeg') center/cover;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  position:relative;
+}
 
-    /* ===== PORTADA ===== */
-    .portada {
-      height: 100vh;
-      background: url('cuadro1.jpeg') no-repeat center/cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      position: relative;
-    }
+.portada::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  backdrop-filter:blur(5px);
+}
 
-    .portada::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(4px);
-    }
+.portada h1,.portada h2,.portada p{
+  position:relative;
+}
 
-    .contenido-portada {
-      position: relative;
-      z-index: 1;
-      animation: fadeIn 2s ease;
-    }
+.btn{
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  background:#ff6b6b;
+  color:white;
+  cursor:pointer;
+}
 
-    .btn {
-      margin-top: 20px;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 30px;
-      background: #ff6b6b;
-      color: white;
-      cursor: pointer;
-    }
+/* GALERIA */
+.galeria{
+  column-count:3;
+  column-gap:20px;
+  padding:80px 20px;
+}
 
-    .btn:hover {
-      background: #ff4c4c;
-    }
+.card{
+  background:rgba(255,255,255,0.1);
+  margin-bottom:20px;
+  border-radius:15px;
+  padding:10px;
+  display:inline-block;
+  width:100%;
+}
 
-    /* ===== GALERÍA ===== */
-    .galeria {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 25px;
-      padding: 80px 20px;
-    }
+.card img{
+  width:100%;
+  border-radius:10px;
+  cursor:pointer;
+}
 
-    .card {
-      background: rgba(255,255,255,0.1);
-      border-radius: 15px;
-      padding: 15px;
-      width: 250px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
-      transition: 0.4s;
-    }
+/* LIKE */
+.like{
+  cursor:pointer;
+  font-size:20px;
+}
 
-    .card:hover {
-      transform: scale(1.05);
-    }
+/* FILTROS */
+.filtros button{
+  margin:10px;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
 
-    .card img {
-      width: 100%;
-      border-radius: 10px;
-      cursor: pointer;
-    }
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+}
 
-    /* ===== CONTACTO ===== */
-    .contacto {
-      padding: 50px;
-    }
+.modal img{
+  max-width:80%;
+}
 
-    /* ===== MODAL ===== */
-    .modal {
-      display: none;
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
-      justify-content: center;
-      align-items: center;
-      top: 0;
-      left: 0;
-    }
+/* CONTACTO */
+.contacto{
+  padding:40px;
+}
 
-    .modal img {
-      max-width: 80%;
-      max-height: 80%;
-    }
-
-    /* ===== ANIMACIÓN ===== */
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-  </style>
+/* RESPONSIVE */
+@media(max-width:800px){
+  .galeria{column-count:2;}
+}
+@media(max-width:500px){
+  .galeria{column-count:1;}
+}
+</style>
 </head>
 
 <body>
 
-<!-- ===== MENÚ ===== -->
+<!-- MENU -->
 <div class="menu">
-  <a href="#">Inicio</a>
-  <a href="#galeria">Galería</a>
-  <a href="#contacto">Contacto</a>
+<a href="#">Inicio</a>
+<a href="#galeria">Galería</a>
+<a href="#contacto">Contacto</a>
 </div>
 
-<!-- ===== PORTADA ===== -->
+<!-- PORTADA -->
 <div class="portada">
-  <div class="contenido-portada">
-    <h1>🎨 Galería de Pinturas</h1>
-    <h2>Artista: Valentín</h2>
-    <p>Pinturas al óleo y por encargo</p>
+<h1>🎨 Galería de Pinturas</h1>
+<h2>Artista: Valentín</h2>
+<p>Pinturas al óleo por encargo</p>
 
-    <a href="#galeria">
-      <button class="btn">Ver obras</button>
-    </a>
-  </div>
+<a href="#galeria">
+<button class="btn">Ver obras</button>
+</a>
 </div>
 
-<!-- ===== GALERÍA ===== -->
+<!-- FILTROS -->
+<div class="filtros">
+<button onclick="filtrar('todos')">Todos</button>
+<button onclick="filtrar('paisaje')">Paisajes</button>
+<button onclick="filtrar('abstracto')">Abstracto</button>
+</div>
+
 <h2 id="galeria">Mis Obras</h2>
 
 <div class="galeria">
 
-  <!-- AGREGA TODAS TUS IMÁGENES AQUÍ -->
+<div class="card paisaje">
+<img src="cuadro1.jpeg" onclick="abrir(this.src)">
+<h3>Obra 1</h3>
+<span class="like" onclick="like(this)">❤️</span>
+</div>
 
-  <div class="card">
-    <img src="cuadro1.jpeg" onclick="abrir(this.src)">
-    <h3>Obra 1</h3>
-    <p>Óleo sobre lienzo</p>
-  </div>
+<div class="card paisaje">
+<img src="cuadro2.jpeg" onclick="abrir(this.src)">
+<h3>Obra 2</h3>
+<span class="like" onclick="like(this)">❤️</span>
+</div>
 
-  <div class="card">
-    <img src="cuadro2.jpeg" onclick="abrir(this.src)">
-    <h3>Obra 2</h3>
-    <p>Óleo sobre lienzo</p>
-  </div>
+<div class="card abstracto">
+<img src="cuadro3.jpg" onclick="abrir(this.src)">
+<h3>Obra 3</h3>
+<span class="like" onclick="like(this)">❤️</span>
+</div>
 
-  <div class="card">
-    <img src="cuadro3.jpg" onclick="abrir(this.src)">
-    <h3>Obra 3</h3>
-    <p>Óleo sobre lienzo</p>
-  </div>
+<div class="card abstracto">
+<img src="cuadro4.jpg" onclick="abrir(this.src)">
+<h3>Obra 4</h3>
+<span class="like" onclick="like(this)">❤️</span>
+</div>
 
-  <div class="card">
-    <img src="cuadro4.jpg" onclick="abrir(this.src)">
-    <h3>Obra 4</h3>
-    <p>Óleo sobre lienzo</p>
-  </div>
+<div class="card paisaje">
+<img src="cuadro5.jpg" onclick="abrir(this.src)">
+<h3>Obra 5</h3>
+<span class="like" onclick="like(this)">❤️</span>
+</div>
 
-  <div class="card">
-    <img src="cuadro5.jpg" onclick="abrir(this.src)">
-    <h3>Obra 5</h3>
-    <p>Óleo sobre lienzo</p>
-  </div>
+<div class="card paisaje">
+<img src="cuadro6.jpg" onclick="abrir(this.src)">
+<h3>Obra 6</h3>
+<span class="like" onclick="like(this)">❤️</span>
+</div>
 
-  <div class="card">
-    <img src="cuadro6.jpg" onclick="abrir(this.src)">
-    <h3>Obra 6</h3>
-    <p>Óleo sobre lienzo</p>
-  </div>
+<div class="card abstracto">
+<img src="cuadro7.jpg" onclick="abrir(this.src)">
+<h3>Obra 7</h3>
+<span class="like" onclick="like(this)">❤️</span>
+</div>
 
-  <div class="card">
-    <img src="cuadro7.jpg" onclick="abrir(this.src)">
-    <h3>Obra 7</h3>
-    <p>Óleo sobre lienzo</p>
-  </div>
+<div class="card paisaje">
+<img src="cuadro8.jpg" onclick="abrir(this.src)">
+<h3>Obra 8</h3>
+<span class="like" onclick="like(this)">❤️</span>
+</div>
 
-  <div class="card">
-    <img src="cuadro8.jpg" onclick="abrir(this.src)">
-    <h3>Obra 8</h3>
-    <p>Óleo sobre lienzo</p>
-  </div>
+<div class="card abstracto">
+<img src="cuadro9.jpg" onclick="abrir(this.src)">
+<h3>Obra 9</h3>
+<span class="like" onclick="like(this)">❤️</span>
+</div>
 
-  <div class="card">
-    <img src="cuadro9.jpg" onclick="abrir(this.src)">
-    <h3>Obra 9</h3>
-    <p>Óleo sobre lienzo</p>
-  </div>
+<div class="card paisaje">
+<img src="cuadro10.jpg" onclick="abrir(this.src)">
+<h3>Obra 10</h3>
+<span class="like" onclick="like(this)">❤️</span>
+</div>
 
-  <div class="card">
-    <img src="cuadro10.jpg" onclick="abrir(this.src)">
-    <h3>Obra 10</h3>
-    <p>Óleo sobre lienzo</p>
-  </div>
-<div class="card">
-  <img src="cuadro11.jpg" onclick="abrir(this.src)">
-  <h3>Obra 11</h3>
-  <p>Óleo sobre lienzo</p>
+<div class="card abstracto">
+<img src="cuadro11.jpg" onclick="abrir(this.src)">
+<h3>Obra 11</h3>
+<span class="like" onclick="like(this)">❤️</span>
 </div>
 
 </div>
 
-<!-- ===== CONTACTO ===== -->
+<!-- CONTACTO -->
 <div id="contacto" class="contacto">
-  <h2>Contacto</h2>
-  <p>Para más información o pedidos personalizados:</p>
-  <p><b>Artista: Valentín</b></p>
+<h2>Contacto</h2>
+
+<p>Realizamos pinturas al óleo por encargo según la preferencia del cliente.</p>
+
+<form>
+<input type="text" placeholder="Nombre" required><br><br>
+<input type="email" placeholder="Correo" required><br><br>
+<textarea placeholder="Mensaje"></textarea><br><br>
+<button type="submit">Enviar</button>
+</form>
+
 </div>
 
-<!-- ===== MODAL ===== -->
+<!-- MODAL -->
 <div id="modal" class="modal" onclick="cerrar()">
-  <img id="imgGrande">
+<img id="imgGrande">
 </div>
 
 <script>
-  function abrir(src) {
-    document.getElementById("modal").style.display = "flex";
-    document.getElementById("imgGrande").src = src;
-  }
+function abrir(src){
+document.getElementById("modal").style.display="flex";
+document.getElementById("imgGrande").src=src;
+}
 
-  function cerrar() {
-    document.getElementById("modal").style.display = "none";
-  }
+function cerrar(){
+document.getElementById("modal").style.display="none";
+}
+
+function like(el){
+el.style.color="red";
+}
+
+function filtrar(tipo){
+let cards=document.querySelectorAll(".card");
+cards.forEach(c=>{
+c.style.display=(tipo==="todos"||c.classList.contains(tipo))?"block":"none";
+});
+}
 </script>
 
 </body>
